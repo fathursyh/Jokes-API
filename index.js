@@ -23,15 +23,29 @@ app.get('/jokes/:id', (req, res) => {
 //3. GET a jokes by filtering on the joke type
 app.get('/jokes', (req, res) => {
   const type = req.query.type;
-  console.log(type);
   res.json(jokes.filter(item => {
     return item.jokeType.toLowerCase() == type.toLowerCase();
   }))
 });
 //4. POST a new joke
-
+app.post('/jokes', (req, res) => {
+  const joke = {
+    id: jokes.length + 1,
+    jokeText: req.body.jokeText,
+    jokeType: req.body.jokeType
+  }
+  jokes.push(joke);
+  res.send('Joke posted successfully!');
+});
 //5. PUT a joke
-
+app.put('/jokes/:id', (req, res) => {
+  jokes[req.params.id-1] = {
+    id: parseInt(req.params.id),
+    jokeText : req.body.jokeText,
+    jokeType : req.body.jokeType,
+  }
+  res.json(jokes[req.params.id-1]);
+});
 //6. PATCH a joke
 
 //7. DELETE Specific joke
