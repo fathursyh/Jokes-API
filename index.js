@@ -60,7 +60,10 @@ const replacement = {
   res.send('berhasil diubah!!');
 });
 //7. DELETE Specific joke
-
+app.delete('/jokes/:id', (req, res) => {
+  
+  res.send(`Joke with id ${req.params.id} has been deleted`);
+});
 //8. DELETE All jokes
 
 app.listen(port, () => {
