@@ -61,11 +61,15 @@ const replacement = {
 });
 //7. DELETE Specific joke
 app.delete('/jokes/:id', (req, res) => {
-  
+  const index = jokes.findIndex(joke => {return joke.id == req.params.id});
+  jokes.splice(index, 1);
   res.send(`Joke with id ${req.params.id} has been deleted`);
 });
 //8. DELETE All jokes
-
+app.delete('/jokes', (req, res) => {
+  jokes.length = 0;
+  res.send('all jokes have been deleted');
+});
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);
 });
